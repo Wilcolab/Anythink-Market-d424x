@@ -7,7 +7,10 @@ const Item = mongoose.model("Item");
 const Comment = mongoose.model("Comment");
 const User = mongoose.model("User");
 
-mongoose.connect(process.env.MONGODB_URI);
+const connectDB= async () =>{
+ 	const connected = await mongoose.connect(process.env.MONGODB_URI);
+}
+
 
 const importData = async ()=>{
 	try{
@@ -47,6 +50,7 @@ const deleteData = async() =>{
 }
 
 const seedData =async()=>{
+	await connectDB()
 	await deleteData()
 	await importData()
 }
