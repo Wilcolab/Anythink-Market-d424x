@@ -40,7 +40,9 @@ const importData = async ()=>{
 
 const deleteData = async() =>{
 	try {
-		
+		await User.deleteMany({})
+		await Item.deleteMany({})
+		await Comment.deleteMany({})
 		console.log('Data destroyed...')
 	} catch (error) {
 		console.log(error)
@@ -48,9 +50,9 @@ const deleteData = async() =>{
 }
 
 const seedData =async()=>{
-	await User.deleteMany({})
-	await Item.deleteMany({})
-	await Comment.deleteMany({})
+	await connectDB()
+	await deleteData()
+	await importData()
 }
 
 seedData().then(()=>{
