@@ -7,13 +7,11 @@ const Item = mongoose.model("Item");
 const Comment = mongoose.model("Comment");
 const User = mongoose.model("User");
 
-mongoose.connect(process.env.MONGODB_URI,{
-	useNewUrlParser: true,
-	useUnifiedTopology: true
-});
+mongoose.connect(process.env.MONGODB_URI);
 
 const importData = async ()=>{
 	try{
+		await deleteData()
 		for(let start = 0; start <100; start++){
 			let user = await User.create({
 				username: `user${start}`,
@@ -45,12 +43,9 @@ const deleteData = async() =>{
 		await Item.deleteMany({})
 		await Comment.deleteMany({})
 		console.log('Data destroyed...')
-        process.exit()
 	} catch (error) {
 		console.log(error)
 	}  
 }
 
-
-	  //deleteData()
-	  //importData()
+importData()
