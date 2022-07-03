@@ -11,7 +11,6 @@ mongoose.connect(process.env.MONGODB_URI);
 
 const importData = async ()=>{
 	try{
-		await deleteData()
 		for(let start = 0; start <100; start++){
 			let user = await User.create({
 				username: `user${start}`,
@@ -30,7 +29,6 @@ const importData = async ()=>{
 			  })
 		}
 		console.log('Data Imported...')
-		process.exit()
 	}catch(err){
 		console.log(err)
 	}
@@ -48,4 +46,13 @@ const deleteData = async() =>{
 	}  
 }
 
-importData()
+const seedData =async()=>{
+	await deleteData()
+	await importData()
+}
+
+seedData().then(()=>{
+ mongoose.disconnect().then(() => {
+    process.exit()
+  })
+})
