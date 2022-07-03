@@ -7,13 +7,16 @@ const Item = mongoose.model("Item");
 const Comment = mongoose.model("Comment");
 const User = mongoose.model("User");
 
-const connectDB= async () =>{
- 	const connected = await mongoose.connect(process.env.MONGODB_URI);
-}
 
 
-const importData = async ()=>{
+
+
+const seedData =async()=>{
 	try{
+		const connected = await mongoose.connect(process.env.MONGODB_URI);
+		await User.deleteMany({})
+		await Item.deleteMany({})
+		await Comment.deleteMany({})
 		for(let start = 0; start <100; start++){
 			let user = await User.create({
 				username: `user${start}`,
@@ -35,24 +38,6 @@ const importData = async ()=>{
 	}catch(err){
 		console.log(err)
 	}
-	
-}
-
-const deleteData = async() =>{
-	try {
-		await User.deleteMany({})
-		await Item.deleteMany({})
-		await Comment.deleteMany({})
-		console.log('Data destroyed...')
-	} catch (error) {
-		console.log(error)
-	}  
-}
-
-const seedData =async()=>{
-	await connectDB()
-	await deleteData()
-	await importData()
 }
 
 seedData().then(()=>{
