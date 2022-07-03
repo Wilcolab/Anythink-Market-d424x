@@ -7,7 +7,10 @@ const Item = mongoose.model("Item");
 const Comment = mongoose.model("Comment");
 const User = mongoose.model("User");
 
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI,{
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+});
 
 const importData = async ()=>{
 	try{
