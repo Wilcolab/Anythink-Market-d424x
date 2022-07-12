@@ -37,6 +37,7 @@ router.param("comment", function(req, res, next, id) {
 });
 
 router.get("/", auth.optional, function(req, res, next) {
+	console.log('What is in the Title', req.query.title)
   var query = {};
   var limit = 100;
   var offset = 0;
@@ -52,6 +53,10 @@ router.get("/", auth.optional, function(req, res, next) {
   if (typeof req.query.tag !== "undefined") {
     query.tagList = { $in: [req.query.tag] };
   }
+
+if(typeof req.query.title !== "undefined"){
+	query.title ={$in: [req.query.title]}
+}
 
   Promise.all([
     req.query.seller ? User.findOne({ username: req.query.seller }) : null,
