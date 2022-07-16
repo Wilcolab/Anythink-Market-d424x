@@ -1,4 +1,5 @@
 import React from "react";
+import Search from "./Search";
 import logo from "../../imgs/logo.png";
 
 const Banner = () => {
@@ -6,10 +7,7 @@ const Banner = () => {
     <div className="banner text-white">
       <div className="container p-4 text-center">
         <img src={logo} alt="banner" />
-        <div>
-          <span id="get-part">A place to get</span>
-          <span> the cool stuff.</span>
-        </div>
+        <Search />
       </div>
     </div>
   );
