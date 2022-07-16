@@ -41,6 +41,7 @@ const Search = ({ onChangeFilter }) => {
             value={filter}
             type="text"
             name="title"
+			id="search-box"
             placeholder="What is that you truly desire?"
           />
           <span className="text-inplace"> the cool stuff.</span>

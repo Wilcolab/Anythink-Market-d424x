@@ -2,7 +2,7 @@ import React from "react";
 import Search from "./Search";
 import logo from "../../imgs/logo.png";
 
-const Banner = ({ filter }) => {
+const Banner = () => {
   return (
     <div className="banner text-white">
       <div className="container p-4 text-center">
